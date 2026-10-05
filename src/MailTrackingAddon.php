@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace rafalmasiarek\DashboardKitMailTracking;
 
 use Psr\Container\ContainerInterface;
+use rafalmasiarek\DashboardKit\Hook\HookRegistry;
 use rafalmasiarek\DashboardKit\Log\AuditLog;
 use rafalmasiarek\DashboardKit\Mail\MailerInterface;
 use rafalmasiarek\DashboardKit\Model\Model;
@@ -25,6 +26,11 @@ use Slim\App;
  *
  * Usage (app bootstrap, after Dashboard::create()):
  *   MailTrackingAddon::register($app, $container, $config);
+ *
+ * Hooks emitted (via dashboard-kit's HookRegistry, no-op if unregistered):
+ *   mail_opened (string $toEmail, string $mailType, string $token, string $ip)
+ *
+ * Register with: $dashboard->on('mail_opened', function (...) { ... });
  *
  * @package rafalmasiarek\DashboardKitMailTracking
  */
@@ -138,6 +144,13 @@ final class MailTrackingAddon
                 ]);
 
                 $container->get(AuditLog::class)->mailOpen((string) $row['to_email'], (string) $row['mail_type']);
+                $container->get(HookRegistry::class)->emit(
+                    'mail_opened',
+                    (string) $row['to_email'],
+                    (string) $row['mail_type'],
+                    $token,
+                    $ip,
+                );
             }
 
             $res->getBody()->write(base64_decode(self::PIXEL_PNG_BASE64));
