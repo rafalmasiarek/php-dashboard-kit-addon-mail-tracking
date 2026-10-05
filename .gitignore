@@ -1,0 +1,14 @@
+vendor/
+composer.lock
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+*.log
+storage/
+.DS_Store
+.phpunit.result.cache
+.phpunit.cache/
+coverage/
