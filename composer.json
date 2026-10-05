@@ -1,0 +1,18 @@
+{
+    "name": "rafalmasiarek/dashboard-kit-addon-mail-tracking",
+    "description": "Open-tracking pixel addon for dashboard-kit outgoing email — decorates MailerInterface to append a pixel to every message, independent of which controller sends it.",
+    "type": "library",
+    "license": "BUSL-1.1",
+    "require": {
+        "php": ">=8.2",
+        "rafalmasiarek/dashboard-kit": "^5.0",
+        "rafalmasiarek/real-ip-resolver": "^2.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "rafalmasiarek\\DashboardKitMailTracking\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
