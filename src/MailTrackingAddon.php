@@ -132,7 +132,7 @@ final class MailTrackingAddon
      */
     private static function registerRoute(App $app, ContainerInterface $container): void
     {
-        $app->get('/mail/{token}.png', static function ($req, $res, array $args) use ($container) {
+        $app->get('/mail/{token}.png', function ($req, $res, array $args) use ($container) {
             $token = (string) $args['token'];
             $row   = Model::on('mail_tracking')->where('token', $token)->first();
 
