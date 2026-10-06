@@ -28,7 +28,7 @@ use Slim\App;
  *   MailTrackingAddon::register($app, $container, $config);
  *
  * Hooks emitted (via dashboard-kit's HookRegistry, no-op if unregistered):
- *   mail_opened (string $toEmail, string $mailType, string $token, string $ip)
+ *   mail_opened (string $toEmail, string $mailType, string $token, string $ip, ?string $correlationId)
  *
  * Register with: $dashboard->on('mail_opened', function (...) { ... });
  *
@@ -84,11 +84,12 @@ final class MailTrackingAddon
             'mail_tracking' => [
                 'columns' => [
                     'id'        => ['type' => 'int', 'unsigned' => true, 'auto_increment' => true, 'null' => false],
-                    'token'     => ['type' => 'char(32)', 'null' => false],
-                    'to_email'  => ['type' => 'varchar(255)', 'null' => false],
-                    'mail_type' => ['type' => 'varchar(255)', 'null' => false],
-                    'opened_at' => ['type' => 'datetime', 'default' => null],
-                    'open_ip'   => ['type' => 'varchar(45)', 'default' => null],
+                    'token'          => ['type' => 'char(32)', 'null' => false],
+                    'to_email'       => ['type' => 'varchar(255)', 'null' => false],
+                    'mail_type'      => ['type' => 'varchar(255)', 'null' => false],
+                    'correlation_id' => ['type' => 'varchar(64)', 'default' => null],
+                    'opened_at'      => ['type' => 'datetime', 'default' => null],
+                    'open_ip'        => ['type' => 'varchar(45)', 'default' => null],
                 ],
                 'primary' => 'id',
                 'indexes' => [
@@ -143,13 +144,16 @@ final class MailTrackingAddon
                     'open_ip'   => $ip,
                 ]);
 
-                $container->get(AuditLog::class)->mailOpen((string) $row['to_email'], (string) $row['mail_type']);
+                $correlationId = $row['correlation_id'] !== null ? (string) $row['correlation_id'] : null;
+
+                $container->get(AuditLog::class)->mailOpen((string) $row['to_email'], (string) $row['mail_type'], $correlationId);
                 $container->get(HookRegistry::class)->emit(
                     'mail_opened',
                     (string) $row['to_email'],
                     (string) $row['mail_type'],
                     $token,
                     $ip,
+                    $correlationId,
                 );
             }
 

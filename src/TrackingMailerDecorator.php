@@ -41,9 +41,10 @@ final class TrackingMailerDecorator implements MailerInterface
         $token = bin2hex(random_bytes(16));
 
         Model::on(self::TABLE)->insert([
-            'token'     => $token,
-            'to_email'  => $message->getToEmail(),
-            'mail_type' => $message->getSubject(),
+            'token'          => $token,
+            'to_email'       => $message->getToEmail(),
+            'mail_type'      => $message->getSubject(),
+            'correlation_id' => $message->getCorrelationId(),
         ]);
 
         $pixelUrl = rtrim($this->baseUrl, '/') . '/mail/' . $token . '.png';
