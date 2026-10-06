@@ -48,6 +48,9 @@ final class TrackingMailerDecorator implements MailerInterface
         ]);
 
         $pixelUrl = rtrim($this->baseUrl, '/') . '/mail/' . $token . '.png';
+        if ($message->getCorrelationId() !== null) {
+            $pixelUrl .= '?id=' . rawurlencode($message->getCorrelationId());
+        }
         $message->appendBodyHtml(
             sprintf(
                 '<img src="%s" width="1" height="1" alt="" style="border:0;display:block;width:1px;height:1px">',
