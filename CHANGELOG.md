@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.3](https://github.com/rafalmasiarek/php-dashboard-kit-addon-mail-tracking/compare/v0.1.2...v0.1.3) (2026-10-06)
+
+
+### Bug Fixes
+
+* drop static from the pixel route closure ([#5](https://github.com/rafalmasiarek/php-dashboard-kit-addon-mail-tracking/issues/5)) ([8cc7c61](https://github.com/rafalmasiarek/php-dashboard-kit-addon-mail-tracking/commit/8cc7c615dba583bea57bbd1e88fbf5047f9e71f9))
+
 ## [0.1.2](https://github.com/rafalmasiarek/php-dashboard-kit-addon-mail-tracking/compare/v0.1.1...v0.1.2) (2026-10-06)
 
 
