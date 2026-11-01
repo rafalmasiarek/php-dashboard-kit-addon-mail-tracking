@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.4](https://github.com/rafalmasiarek/php-dashboard-kit-addon-mail-tracking/compare/v0.1.3...v0.1.4) (2026-11-01)
+
+
+### Miscellaneous Chores
+
+* **deps:** accept any dashboard-kit &gt;=5.3, not just the current major ([#7](https://github.com/rafalmasiarek/php-dashboard-kit-addon-mail-tracking/issues/7)) ([1405d6a](https://github.com/rafalmasiarek/php-dashboard-kit-addon-mail-tracking/commit/1405d6a28dfaf124419dca5147c3ba9805babc41))
+
 ## [0.1.3](https://github.com/rafalmasiarek/php-dashboard-kit-addon-mail-tracking/compare/v0.1.2...v0.1.3) (2026-10-06)
 
 
