@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.5](https://github.com/rafalmasiarek/php-dashboard-kit-addon-mail-tracking/compare/v0.1.4...v0.1.5) (2026-11-02)
+
+
+### Bug Fixes
+
+* **mail-tracking:** register as a mail_sending hook listener instead of decorating MailerInterface ([320e888](https://github.com/rafalmasiarek/php-dashboard-kit-addon-mail-tracking/commit/320e8884b4d7c8f0e6986f5e1b5fa98d5e641a9a))
+* register as a mail_sending hook listener instead of decorating MailerInterface ([d89b1d3](https://github.com/rafalmasiarek/php-dashboard-kit-addon-mail-tracking/commit/d89b1d39d500eb0811ed2eaec0ed960013d627f0))
+
 ## [0.1.4](https://github.com/rafalmasiarek/php-dashboard-kit-addon-mail-tracking/compare/v0.1.3...v0.1.4) (2026-11-01)
 
 
