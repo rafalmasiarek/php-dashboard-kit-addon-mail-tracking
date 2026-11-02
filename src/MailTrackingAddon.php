@@ -7,7 +7,7 @@ namespace rafalmasiarek\DashboardKitMailTracking;
 use Psr\Container\ContainerInterface;
 use rafalmasiarek\DashboardKit\Hook\HookRegistry;
 use rafalmasiarek\DashboardKit\Log\AuditLog;
-use rafalmasiarek\DashboardKit\Mail\MailerInterface;
+use rafalmasiarek\DashboardKit\Mail\MailMessage;
 use rafalmasiarek\DashboardKit\Model\Model;
 use rafalmasiarek\DashboardKit\Schema\ModuleSchemaBuilder;
 use rafalmasiarek\DashboardKit\Schema\SchemaInspector;
@@ -18,11 +18,14 @@ use Slim\App;
 /**
  * Open-tracking pixel addon for dashboard-kit outgoing email.
  *
- * Wraps the app's MailerInterface binding with TrackingMailerDecorator, so
- * every email sent through it — regardless of which controller calls
- * send() — gets a pixel appended. Entirely inert (no schema sync, no
- * route, no decoration) unless config['mail_tracking']['base_url'] is set,
- * and a no-op if no MailerInterface is bound at all (mailer not configured).
+ * Registers a HookRegistry::addListener('mail_sending', ...) listener, so
+ * every email sent through Mailer::send() — regardless of which controller
+ * calls it — gets a pixel appended before delivery. A failure in this
+ * listener (e.g. a DB insert error) is caught and logged by the hook
+ * dispatcher itself and never blocks the actual send; it previously
+ * replaced the whole MailerInterface binding with a decorator, which could.
+ * Entirely inert (no schema sync, no route, no listener) unless
+ * config['mail_tracking']['base_url'] is set.
  *
  * Usage (app bootstrap, after Dashboard::create()):
  *   MailTrackingAddon::register($app, $container, $config);
@@ -56,7 +59,7 @@ final class MailTrackingAddon
         }
 
         self::syncSchema($container, $config);
-        self::decorateMailer($container, $baseUrl);
+        self::registerHook($container, $baseUrl);
         self::registerRoute($app, $container);
     }
 
@@ -100,25 +103,40 @@ final class MailTrackingAddon
     }
 
     /**
-     * Wraps the existing MailerInterface binding with TrackingMailerDecorator.
-     * No-op if nothing is bound (mailer not configured) — resolves the
-     * current instance once, so the decorator wraps a fixed delegate rather
-     * than recursively re-resolving the (now overwritten) binding.
+     * Registers the pixel-appending listener on Mailer's 'mail_sending' hook.
+     * A thrown exception here is caught and logged by
+     * HookRegistry::emit() itself, so a failure (e.g. this INSERT) never
+     * blocks the actual delivery that follows.
      *
      * @param ContainerInterface $container
      * @param string             $baseUrl
      */
-    private static function decorateMailer(ContainerInterface $container, string $baseUrl): void
+    private static function registerHook(ContainerInterface $container, string $baseUrl): void
     {
-        if (!$container->has(MailerInterface::class)) {
-            return;
-        }
+        $container->get(HookRegistry::class)->addListener(
+            'mail_sending',
+            static function (MailMessage $message) use ($baseUrl): void {
+                $token = bin2hex(random_bytes(16));
 
-        $inner = $container->get(MailerInterface::class);
+                Model::on('mail_tracking')->insert([
+                    'token'          => $token,
+                    'to_email'       => $message->getToEmail(),
+                    'mail_type'      => $message->getSubject(),
+                    'correlation_id' => $message->getCorrelationId(),
+                ]);
 
-        $container->set(
-            MailerInterface::class,
-            static fn(): TrackingMailerDecorator => new TrackingMailerDecorator($inner, $baseUrl),
+                $pixelUrl = rtrim($baseUrl, '/') . '/mail/' . $token . '.png';
+                if ($message->getCorrelationId() !== null) {
+                    $pixelUrl .= '?id=' . rawurlencode($message->getCorrelationId());
+                }
+                $message->appendBodyHtml(
+                    sprintf(
+                        '<img src="%s" width="1" height="1" alt="" style="border:0;display:block;width:1px;height:1px">',
+                        htmlspecialchars($pixelUrl, ENT_QUOTES),
+                    ),
+                    999,
+                );
+            },
         );
     }
 
