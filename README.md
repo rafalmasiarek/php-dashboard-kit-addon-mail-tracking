@@ -1,7 +1,41 @@
 # dashboard-kit-addon-mail-tracking
+
+
+
+
+
+
+
+
 Open-tracking pixel addon for [dashboard-kit](https://github.com/rafalmasiarek/php-dashboard-kit)
 outgoing email — listens on the `mail_sending` hook to append a pixel to every message,
 independent of which controller sends it.
+
+
+
+
+
+
+
+## License
+
+![License: BUSL-1.1](https://img.shields.io/badge/license-BUSL--1.1-red)
+
+Business Source License 1.1.
+
+Source available; commercial use restricted until 2099-01-01.
+
+
+For alternative licensing, contact: https://masiarek.pl/contact/?af_subject=Commercial+license+%E2%80%94+dashboard-kit-addon-mail-tracking&af_message=Hello%2C+I+am+interested+in+a+commercial+license+for+dashboard-kit-addon-mail-tracking.
+
+
+
+See [LICENSE](LICENSE) for full details.
+
+
+## Authors
+
+- Rafał Masiarek | [website](https://masiarek.pl) | [github](https://github.com/rafalmasiarek)
 
 
 
@@ -99,24 +133,6 @@ Registers the pixel endpoint. The response is identical (a 1x1 PNG) whether or n
 </details>
 
 
-
-## License
-
-![License: BUSL-1.1](https://img.shields.io/badge/license-BUSL--1.1-red)
-
-Business Source License 1.1.
-
-Source available; commercial use restricted until 2099-01-01.
-
-
-For alternative licensing, contact: https://masiarek.pl/contact/?af_subject=Commercial+license+%E2%80%94+dashboard-kit-addon-mail-tracking&af_message=Hello%2C+I+am+interested+in+a+commercial+license+for+dashboard-kit-addon-mail-tracking.
-
-
-
-See [LICENSE](LICENSE) for full details.
-## Authors
-
-- Rafał Masiarek | [website](https://masiarek.pl) | [github](https://github.com/rafalmasiarek)
 
 
 <!-- references -->
