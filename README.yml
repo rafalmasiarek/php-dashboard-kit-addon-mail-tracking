@@ -10,7 +10,7 @@ context:
     outgoing email — listens on the `mail_sending` hook to append a pixel to every message,
     independent of which controller sends it.
 
-includes:
+footer_includes:
   - docs/api.md
 
 authors:
