@@ -26,11 +26,12 @@ Business Source License 1.1.
 Source available; commercial use restricted until 2099-01-01.
 
 
-For alternative licensing, contact: https://masiarek.pl/contact/?af_subject=Commercial+license+%E2%80%94+dashboard-kit-addon-mail-tracking&af_message=Hello%2C+I+am+interested+in+a+commercial+license+for+dashboard-kit-addon-mail-tracking.
-
 
 
 See [LICENSE](LICENSE) for full details.
+
+For alternative licensing, [contact us](https://masiarek.pl/contact/?af_subject=Commercial+license+%E2%80%94+dashboard-kit-addon-mail-tracking&af_message=Hello%2C+I+am+interested+in+a+commercial+license+for+dashboard-kit-addon-mail-tracking.).
+
 
 
 ## Authors
