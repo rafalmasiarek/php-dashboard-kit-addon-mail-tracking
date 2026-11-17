@@ -2,7 +2,15 @@
 
 *final class* — `rafalmasiarek\DashboardKitMailTracking\MailTrackingAddon` · [source](https://github.com/rafalmasiarek/php-dashboard-kit-addon-mail-tracking/blob/main/src/MailTrackingAddon.php#L41)
 
-Open-tracking pixel addon for dashboard-kit outgoing email. Registers a HookRegistry::addListener('mail_sending', ...) listener, so every email sent through Mailer::send() — regardless of which controller calls it — gets a pixel appended before delivery. A failure in this listener (e.g. a DB insert error) is caught and logged by the hook dispatcher itself and never blocks the actual send; it previously replaced the whole MailerInterface binding with a decorator, which could break delivery entirely if the decorator itself failed. Entirely inert (no schema sync, no route, no listener) unless config['mail_tracking']['base_url'] is set. Usage (app bootstrap, after Dashboard::create()): MailTrackingAddon::register($app, $container, $config); Hooks emitted (via dashboard-kit's HookRegistry, no-op if unregistered): mail_opened (string $toEmail, string $mailType, string $token, string $ip, ?string $correlationId) Register with: $dashboard->on('mail_opened', function (...) { ... });
+Open-tracking pixel addon for dashboard-kit outgoing email.
+
+Registers a HookRegistry::addListener('mail_sending', ...) listener, so every email sent through Mailer::send() — regardless of which controller calls it — gets a pixel appended before delivery. A failure in this listener (e.g. a DB insert error) is caught and logged by the hook dispatcher itself and never blocks the actual send; it previously replaced the whole MailerInterface binding with a decorator, which could break delivery entirely if the decorator itself failed. Entirely inert (no schema sync, no route, no listener) unless config['mail_tracking']['base_url'] is set.
+
+Usage (app bootstrap, after Dashboard::create()): MailTrackingAddon::register($app, $container, $config);
+
+Hooks emitted (via dashboard-kit's HookRegistry, no-op if unregistered): mail_opened (string $toEmail, string $mailType, string $token, string $ip, ?string $correlationId)
+
+Register with: $dashboard->on('mail_opened', function (...) { ... });
 
 | Method | Visibility | Returns | Summary |
 |---|---|---|---|
