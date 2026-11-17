@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.1.6](https://github.com/rafalmasiarek/php-dashboard-kit-addon-mail-tracking/compare/v0.1.5...v0.1.6) (2026-11-17)
+
+
+### Bug Fixes
+
+* complete license metadata for BUSL-1.1 ([#12](https://github.com/rafalmasiarek/php-dashboard-kit-addon-mail-tracking/issues/12)) ([d598bd5](https://github.com/rafalmasiarek/php-dashboard-kit-addon-mail-tracking/commit/d598bd5bd242ed47bd334c684f373399687cfb9d))
+* complete truncated sentence in MailTrackingAddon docblock ([#14](https://github.com/rafalmasiarek/php-dashboard-kit-addon-mail-tracking/issues/14)) ([3cf732b](https://github.com/rafalmasiarek/php-dashboard-kit-addon-mail-tracking/commit/3cf732b6749f4399a038280a02db91a5bab8c9c9))
+* rename includes to footer_includes in README.yml ([#15](https://github.com/rafalmasiarek/php-dashboard-kit-addon-mail-tracking/issues/15)) ([bf5b34e](https://github.com/rafalmasiarek/php-dashboard-kit-addon-mail-tracking/commit/bf5b34e81c4b66f88df130682d30cdc0aeb67b93))
+* render license_contact as a markdown link via license_footer ([#16](https://github.com/rafalmasiarek/php-dashboard-kit-addon-mail-tracking/issues/16)) ([ee9de3e](https://github.com/rafalmasiarek/php-dashboard-kit-addon-mail-tracking/commit/ee9de3ef86e1365c45f5e958c0d7a18186bea63c))
+
 ## [0.1.5](https://github.com/rafalmasiarek/php-dashboard-kit-addon-mail-tracking/compare/v0.1.4...v0.1.5) (2026-11-02)
 
 
