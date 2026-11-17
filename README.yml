@@ -1,0 +1,17 @@
+name: dashboard-kit-addon-mail-tracking
+repo_url: https://github.com/rafalmasiarek/php-dashboard-kit-addon-mail-tracking
+license: BUSL-1.1
+
+context:
+  - |
+    Open-tracking pixel addon for [dashboard-kit](https://github.com/rafalmasiarek/php-dashboard-kit)
+    outgoing email — listens on the `mail_sending` hook to append a pixel to every message,
+    independent of which controller sends it.
+
+includes:
+  - docs/api.md
+
+authors:
+  - name: Rafał Masiarek
+    github: rafalmasiarek
+    website: https://masiarek.pl
