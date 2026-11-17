@@ -1,6 +1,8 @@
 name: dashboard-kit-addon-mail-tracking
 repo_url: https://github.com/rafalmasiarek/php-dashboard-kit-addon-mail-tracking
 license: BUSL-1.1
+license_change_date: "2099-01-01"
+license_contact: https://masiarek.pl/contact/?af_subject=Commercial+license+%E2%80%94+dashboard-kit-addon-mail-tracking&af_message=Hello%2C+I+am+interested+in+a+commercial+license+for+dashboard-kit-addon-mail-tracking.
 
 context:
   - |
