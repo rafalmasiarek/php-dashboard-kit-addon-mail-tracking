@@ -1,8 +1,8 @@
 ## `MailTrackingAddon`
 
-*final class* — `rafalmasiarek\DashboardKitMailTracking\MailTrackingAddon` · [source](https://github.com/rafalmasiarek/php-dashboard-kit-addon-mail-tracking/blob/main/src/MailTrackingAddon.php#L40)
+*final class* — `rafalmasiarek\DashboardKitMailTracking\MailTrackingAddon` · [source](https://github.com/rafalmasiarek/php-dashboard-kit-addon-mail-tracking/blob/main/src/MailTrackingAddon.php#L41)
 
-Open-tracking pixel addon for dashboard-kit outgoing email. Registers a HookRegistry::addListener('mail_sending', ...) listener, so every email sent through Mailer::send() — regardless of which controller calls it — gets a pixel appended before delivery. A failure in this listener (e.g. a DB insert error) is caught and logged by the hook dispatcher itself and never blocks the actual send; it previously replaced the whole MailerInterface binding with a decorator, which could. Entirely inert (no schema sync, no route, no listener) unless config['mail_tracking']['base_url'] is set. Usage (app bootstrap, after Dashboard::create()): MailTrackingAddon::register($app, $container, $config); Hooks emitted (via dashboard-kit's HookRegistry, no-op if unregistered): mail_opened (string $toEmail, string $mailType, string $token, string $ip, ?string $correlationId) Register with: $dashboard->on('mail_opened', function (...) { ... });
+Open-tracking pixel addon for dashboard-kit outgoing email. Registers a HookRegistry::addListener('mail_sending', ...) listener, so every email sent through Mailer::send() — regardless of which controller calls it — gets a pixel appended before delivery. A failure in this listener (e.g. a DB insert error) is caught and logged by the hook dispatcher itself and never blocks the actual send; it previously replaced the whole MailerInterface binding with a decorator, which could break delivery entirely if the decorator itself failed. Entirely inert (no schema sync, no route, no listener) unless config['mail_tracking']['base_url'] is set. Usage (app bootstrap, after Dashboard::create()): MailTrackingAddon::register($app, $container, $config); Hooks emitted (via dashboard-kit's HookRegistry, no-op if unregistered): mail_opened (string $toEmail, string $mailType, string $token, string $ip, ?string $correlationId) Register with: $dashboard->on('mail_opened', function (...) { ... });
 
 | Method | Visibility | Returns | Summary |
 |---|---|---|---|
@@ -16,7 +16,7 @@ Open-tracking pixel addon for dashboard-kit outgoing email. Registers a HookRegi
 
 #### `MailTrackingAddon register()`
 
-[source](https://github.com/rafalmasiarek/php-dashboard-kit-addon-mail-tracking/blob/main/src/MailTrackingAddon.php#L54)
+[source](https://github.com/rafalmasiarek/php-dashboard-kit-addon-mail-tracking/blob/main/src/MailTrackingAddon.php#L55)
 
 ```php
 public static function register(App $app, ContainerInterface $container, array $config): void
@@ -35,7 +35,7 @@ public static function register(App $app, ContainerInterface $container, array $
 
 #### `MailTrackingAddon syncSchema()`
 
-[source](https://github.com/rafalmasiarek/php-dashboard-kit-addon-mail-tracking/blob/main/src/MailTrackingAddon.php#L73)
+[source](https://github.com/rafalmasiarek/php-dashboard-kit-addon-mail-tracking/blob/main/src/MailTrackingAddon.php#L74)
 
 ```php
 private static function syncSchema(ContainerInterface $container, array $config): void
@@ -55,7 +55,7 @@ Creates/updates the mail_tracking table via ModuleSchemaBuilder, the same mechan
 
 #### `MailTrackingAddon registerHook()`
 
-[source](https://github.com/rafalmasiarek/php-dashboard-kit-addon-mail-tracking/blob/main/src/MailTrackingAddon.php#L114)
+[source](https://github.com/rafalmasiarek/php-dashboard-kit-addon-mail-tracking/blob/main/src/MailTrackingAddon.php#L115)
 
 ```php
 private static function registerHook(ContainerInterface $container, string $baseUrl): void
@@ -75,7 +75,7 @@ Registers the pixel-appending listener on Mailer's 'mail_sending' hook. A thrown
 
 #### `MailTrackingAddon registerRoute()`
 
-[source](https://github.com/rafalmasiarek/php-dashboard-kit-addon-mail-tracking/blob/main/src/MailTrackingAddon.php#L151)
+[source](https://github.com/rafalmasiarek/php-dashboard-kit-addon-mail-tracking/blob/main/src/MailTrackingAddon.php#L152)
 
 ```php
 private static function registerRoute(App $app, ContainerInterface $container): void
